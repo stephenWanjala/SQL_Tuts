@@ -5,11 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.navigation.compose.rememberNavController
 import com.stephenwanjala.sqltuts.ui.theme.SQLTutsTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,9 +22,10 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             SQLTutsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
-                }
+                val navController = rememberNavController()
+                NavigationHost(
+                    navHostController = navController,
+                )
             }
         }
     }

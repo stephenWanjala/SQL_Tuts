@@ -60,4 +60,18 @@ sealed interface Screen {
         val tittle: String,
         val body: String
     ) : Screen
+    @Serializable
+    data object Intro2MYSQL:Screen
+
+    @Serializable
+    data object InstallingMYSQL:Screen
+
+    @Serializable
+    data object ConnectToServer:Screen
+
+    @Serializable
+    data object DownLoadDataSample:Screen
+
+    @Serializable
+    data object LoadSampleData:Screen
 }

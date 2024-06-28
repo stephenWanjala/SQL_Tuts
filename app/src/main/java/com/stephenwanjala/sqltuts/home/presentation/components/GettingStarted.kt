@@ -12,10 +12,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,12 +24,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.stephenwanjala.sqltuts.R
+import com.stephenwanjala.sqltuts.Screen
 import com.stephenwanjala.sqltuts.home.HomeSectionItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GettingStarted(navController: NavController) {
-    val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -37,7 +38,7 @@ fun GettingStarted(navController: NavController) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                MediumTopAppBar(
+                TopAppBar(
                     title = {
                         Text(
                             text = "Getting Started",
@@ -55,17 +56,16 @@ fun GettingStarted(navController: NavController) {
                     }, scrollBehavior = scrollBehaviour
                 )
             }
-        ) {
+        ) { paddingValues ->
             Column(
                 modifier = Modifier
-                    .padding(it)
+                    .padding(paddingValues)
                     .fillMaxWidth()
                     .nestedScroll(scrollBehaviour.nestedScrollConnection)
             ) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-//                    .padding(it)
                         .padding(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -87,7 +87,9 @@ fun GettingStarted(navController: NavController) {
                             )
                         HomeItem(
                             homeSectionItem = homeSectionItem,
-                            onItemClick = { })
+                            onItemClick = {
+                                navController.navigate(Screen.MyQSLGettingStartedDestination(resId = it.resId, tittle = it.tittle, body = it.body))
+                            })
                     }
 
 

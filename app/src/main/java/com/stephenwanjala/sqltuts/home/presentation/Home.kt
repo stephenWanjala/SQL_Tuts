@@ -18,6 +18,7 @@ import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -28,14 +29,14 @@ import com.stephenwanjala.sqltuts.home.presentation.components.ListingGrid
 
 @Composable
 fun Home(navController:NavHostController) {
-    val scrollBehaviour = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         Scaffold(
             topBar = {
-                MediumTopAppBar(
+                TopAppBar(
                     title = {
                         Text(text = "MySQL Tutorial")
                     },

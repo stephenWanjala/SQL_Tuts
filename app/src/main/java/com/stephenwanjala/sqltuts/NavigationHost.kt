@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.stephenwanjala.sqltuts.beginner.IntroToMysqlScreen
 import com.stephenwanjala.sqltuts.beginner.presentations.MYSQLGettingStarted
 import com.stephenwanjala.sqltuts.home.HomeSectionItem
 import com.stephenwanjala.sqltuts.home.presentation.Home
@@ -39,6 +40,10 @@ fun NavigationHost(modifier: Modifier = Modifier, navHostController: NavHostCont
                 navController = navHostController,
                 homeSectionItem = HomeSectionItem(resId,tittle,body)
             )
+        }
+
+        composable<Screen.Intro2MYSQL> {
+            IntroToMysqlScreen(navHostController = navHostController)
         }
     }
 }

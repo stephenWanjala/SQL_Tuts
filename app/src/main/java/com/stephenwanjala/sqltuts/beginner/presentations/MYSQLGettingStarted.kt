@@ -116,7 +116,9 @@ fun MYSQLGettingStarted(navController: NavHostController, homeSectionItem: HomeS
                     )
                 }
                 items(GettingStartedData.introData) { item ->
-                    IntroItem(item, onClickItem = {})
+                    IntroItem(item, onClickItem = {
+                        navController.navigate(it.route)
+                    })
 
                 }
             }

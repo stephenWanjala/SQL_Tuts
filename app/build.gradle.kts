@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id ("kotlin-parcelize")
     alias(libs.plugins.compose.compiler)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -88,4 +89,6 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.kotlinx.serialization.json)
 }

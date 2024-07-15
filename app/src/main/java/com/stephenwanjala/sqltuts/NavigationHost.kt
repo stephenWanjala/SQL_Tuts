@@ -1,6 +1,7 @@
 package com.stephenwanjala.sqltuts
 
 import androidx.annotation.DrawableRes
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -8,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.stephenwanjala.sqltuts.beginner.IntroToMysqlScreen
+import com.stephenwanjala.sqltuts.beginner.presentations.InstallMYSQLScreen
 import com.stephenwanjala.sqltuts.beginner.presentations.MYSQLGettingStarted
 import com.stephenwanjala.sqltuts.home.HomeSectionItem
 import com.stephenwanjala.sqltuts.home.presentation.Home
@@ -15,6 +17,7 @@ import com.stephenwanjala.sqltuts.home.presentation.components.GettingStarted
 import com.stephenwanjala.sqltuts.home.presentation.components.MySqlForDevelopers
 import kotlinx.serialization.Serializable
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationHost(modifier: Modifier = Modifier, navHostController: NavHostController) {
     NavHost(
@@ -44,6 +47,9 @@ fun NavigationHost(modifier: Modifier = Modifier, navHostController: NavHostCont
 
         composable<Screen.Intro2MYSQL> {
             IntroToMysqlScreen(navHostController = navHostController)
+        }
+        composable<Screen.InstallingMYSQL>{
+            InstallMYSQLScreen(navHostController = navHostController)
         }
     }
 }

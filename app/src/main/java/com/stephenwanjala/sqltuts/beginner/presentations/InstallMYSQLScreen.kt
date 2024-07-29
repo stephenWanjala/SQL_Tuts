@@ -364,7 +364,6 @@ fun InstallMYSQLScreen(navHostController: NavHostController) {
                         modifier = Modifier.padding(8.dp),
                     )
 
-//                    <h3 class="wp-block-heading">Step 7. Entering a password for the root account</h3><p>Enter a secure password for the root account, which has full administrative privileges.</p><p>Be sure to store it safely and use it for <a href="https://www.mysqltutorial.org/getting-started-with-mysql/connect-to-mysql-server/">connecting to the MySQL Server</a> in the future.</p>
                     val anAnnotatedString = buildAnnotatedString {
                         append("Step 7. Entering a password for the root account\n\n")
                         append("Enter a secure password for the root account, which has full administrative privileges.\n\n")

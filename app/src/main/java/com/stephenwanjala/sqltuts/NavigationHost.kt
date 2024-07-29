@@ -10,7 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.stephenwanjala.sqltuts.beginner.IntroToMysqlScreen
 import com.stephenwanjala.sqltuts.beginner.presentations.InstallMYSQLScreen
+import com.stephenwanjala.sqltuts.beginner.presentations.MYSQLBasics
 import com.stephenwanjala.sqltuts.beginner.presentations.MYSQLGettingStarted
+import com.stephenwanjala.sqltuts.beginner.presentations.MYSQLSelectFrom
 import com.stephenwanjala.sqltuts.home.HomeSectionItem
 import com.stephenwanjala.sqltuts.home.presentation.Home
 import com.stephenwanjala.sqltuts.home.presentation.components.GettingStarted
@@ -51,6 +53,14 @@ fun NavigationHost(modifier: Modifier = Modifier, navHostController: NavHostCont
         composable<Screen.InstallingMYSQL>{
             InstallMYSQLScreen(navHostController = navHostController)
         }
+
+        composable< Screen.MYSQLBasicsScreen>{
+            MYSQLBasics(navHostController=navHostController)
+        }
+
+        composable<Screen.MySQSelectFromScreen>{
+            MYSQLSelectFrom(navHostController = navHostController)
+        }
     }
 }
 
@@ -85,4 +95,18 @@ sealed interface Screen {
 
     @Serializable
     data object LoadSampleData:Screen
+    @Serializable
+    data object  MYSQLBasicsScreen:Screen
+
+    @Serializable
+    data object MySQSelectFromScreen:Screen
+
+   companion object{
+       fun createScreenFromString(screenName: String): Screen?{
+           return when(screenName){
+               "MySQSelectFromScreen" -> MySQSelectFromScreen
+               else -> {null}
+           }
+       }
+   }
 }

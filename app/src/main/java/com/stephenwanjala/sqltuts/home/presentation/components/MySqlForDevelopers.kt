@@ -80,7 +80,11 @@ fun MySqlForDevelopers(navController: NavController) {
                 }
 
                 items(items=HomeItemsData.homeSectionItems) { item: HomeSectionItem ->
-                    HomeItem(homeSectionItem = item, onItemClick = {})
+                    HomeItem(homeSectionItem = item, onItemClick = {
+                        item.route?.let { route->
+                            navController.navigate(route)
+                        }
+                    })
                 }
             }
         }

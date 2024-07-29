@@ -1,6 +1,7 @@
 package com.stephenwanjala.sqltuts.home.data
 
 import com.stephenwanjala.sqltuts.R
+import com.stephenwanjala.sqltuts.Screen
 import com.stephenwanjala.sqltuts.home.HomeSectionItem
 
 object HomeItemsData {
@@ -9,7 +10,8 @@ object HomeItemsData {
             HomeSectionItem(
                 resId = R.drawable.mysql_basics,
                 tittle = "MySQL Basics",
-                body = "This MySQL basics section provides you with everything you need to know to manage data in MySQL effectively"
+                body = "This MySQL basics section provides you with everything you need to know to manage data in MySQL effectively",
+                route =  Screen. MYSQLBasicsScreen
             ),
             HomeSectionItem(
                 resId = R.drawable.mysql_stored_procedure,

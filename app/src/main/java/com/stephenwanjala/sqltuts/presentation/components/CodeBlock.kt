@@ -22,11 +22,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.stephenwanjala.sqltuts.utils.highlightSQLSyntax
 
 @Composable
 fun CodeBlock(code: String) {
@@ -49,14 +51,15 @@ fun CodeBlock(code: String) {
 @Composable
 fun SqlCodeBlock(
     code: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    customHighlight: Boolean = true
 ) {
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
     val context = LocalContext.current
     val isDark = isSystemInDarkTheme()
-    val color = if (isDark)  Color(0xFF2E7D32) else Color(0xFF2E7D32)
-    val bgColor = if (isDark)  Color(0xFF121212) else Color(0xBAFFFFFF)
+    val color = if (isDark) Color(0xFF2E7D32) else Color(0xFF2E7D32)
+    val bgColor = if (isDark) Color(0x75CFC0D2) else Color(0xfeFFFFFF)
 
     Surface(
         shape = MaterialTheme.shapes.medium,
@@ -69,23 +72,41 @@ fun SqlCodeBlock(
                 .padding(8.dp)
         ) {
             SelectionContainer {
-                Text(
-                    text = code,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 14.sp,
-                        color = color, // SQL keyword color
-                    ),
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier
-                        .background(bgColor)
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                )
+                if (customHighlight) {
+
+                    Text(
+                        text = highlightSQLSyntax(code = code),
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 14.sp,
+                            color = Color.Unspecified, // SQL keyword color
+                        ),
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .background(bgColor)
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    )
+                } else {
+                    Text(
+                        text = code,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 14.sp,
+                            color = color, // SQL keyword color
+                        ),
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .background(bgColor)
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    )
+                }
+
             }
             IconButton(
                 onClick = {
-                    clipboardManager.setText(androidx.compose.ui.text.AnnotatedString(code))
+                    clipboardManager.setText(AnnotatedString(code))
                     Toast.makeText(context, "Code copied to clipboard", Toast.LENGTH_SHORT).show()
                 },
                 modifier = Modifier.align(Alignment.TopEnd)
@@ -102,13 +123,15 @@ fun SqlCodeBlock(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun SqlCodeBlockPreview() {
+private fun CodeBlockPreview() {
     MaterialTheme {
         SqlCodeBlock(
-            code = """
-                class Person constructor(var firstName: String) {
-                }
-            """.trimIndent()
+            code =
+            """
+            SELECT select_list
+            FROM coo where id = 1 and user_name = 'Stephen';
+        """.trimIndent(),
+            customHighlight = true
         )
     }
 }

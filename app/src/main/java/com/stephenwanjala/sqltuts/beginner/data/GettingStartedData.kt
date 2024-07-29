@@ -19,12 +19,14 @@ object GettingStartedData {
         MySQLIntroData(
             title = "Connect to MySQL Server",
             body = "Walk you through the steps of connecting to the MySQL Server using mysql client program.",
-            route = Screen.ConnectToServer
+            route = Screen.ConnectToServer,
+            uriString = "https://www.mysqltutorial.org/getting-started-with-mysql/connect-to-mysql-server/"
         ),
         MySQLIntroData(
             title = "Download a MySQL Sample Database",
             body = "Introduce you to a sample database called classicmodels and provide you with the link to download it",
-            route = Screen.DownLoadDataSample
+            route = Screen.DownLoadDataSample,
+            uriString = "https://www.mysqltutorial.org/getting-started-with-mysql/mysql-sample-database/"
         ),
         )
 
@@ -34,5 +36,6 @@ object GettingStartedData {
 data class MySQLIntroData(
     val title:String,
     val body:String,
-    val route:Screen
+    val route:Screen,
+    val uriString: String?=null
 )

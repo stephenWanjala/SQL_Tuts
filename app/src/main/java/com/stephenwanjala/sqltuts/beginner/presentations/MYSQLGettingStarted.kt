@@ -38,6 +38,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -128,10 +129,18 @@ fun MYSQLGettingStarted(navController: NavHostController, homeSectionItem: HomeS
 
 @Composable
 fun IntroItem(mySQLIntroData: MySQLIntroData, onClickItem: (MySQLIntroData) -> Unit) {
+    val context = LocalContext.current
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp),
-        onClick = { onClickItem(mySQLIntroData) }) {
+        onClick = {
+            if(mySQLIntroData.uriString!=null){
+                onClickExternalUrl(mySQLIntroData.uriString,context)
+            } else{
+                onClickItem(mySQLIntroData)
+            }
+
+        }) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(
                 text = mySQLIntroData.title, style = MaterialTheme.typography.titleMedium,
@@ -155,3 +164,4 @@ fun Modifier.collapsed(toolBarHeight: Dp, collapsedHeight: Dp): Modifier = compo
 fun Int.toDp(): Dp {
     return (this / Resources.getSystem().displayMetrics.density).dp
 }
+
